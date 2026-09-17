@@ -15,9 +15,9 @@ export default function Home() {
       <section className="appearance" aria-label="FXRKENART appearance intro">
         <div className="appearance__grain" aria-hidden="true" />
         <div className="logo-reveal" aria-label="FXRKENART">
-          <span className="logo-reveal__aura" aria-hidden="true" />
-          <span className="logo-reveal__edge" aria-hidden="true" />
-          <img src="/fxrken-logo.png" alt="fxrken" />
+          <img className="logo-reveal__glow logo-reveal__glow--ambient" src="/fxrken-logo.png" alt="" aria-hidden="true" />
+          <img className="logo-reveal__glow logo-reveal__glow--runner" src="/fxrken-logo.png" alt="" aria-hidden="true" />
+          <img className="logo-reveal__art" src="/fxrken-logo.png" alt="fxrken" />
         </div>
       </section>
 
