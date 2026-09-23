@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { AFTER_INTRO_ACTION, INTRO_DURATION_MS } from "./intro-config";
 import "./styles.css";
 
 function vietnamHour() {
@@ -18,16 +17,6 @@ function App() {
 
   useEffect(() => {
     setIsDay(vietnamHour() >= 6 && vietnamHour() < 18);
-
-    if (AFTER_INTRO_ACTION !== "reload") return;
-
-    const reloadTimer = window.setTimeout(() => {
-      window.location.reload();
-    }, INTRO_DURATION_MS);
-
-    return () => {
-      window.clearTimeout(reloadTimer);
-    };
   }, []);
 
   return (

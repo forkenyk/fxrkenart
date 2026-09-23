@@ -1,6 +1,2 @@
-export const INTRO_DURATION_MS = 5000;
-
-// Sau này có thể thêm: "show-home", "open-showcase", "open-music", ...
-export type AfterIntroAction = "reload" | "hold";
-
-export const AFTER_INTRO_ACTION: AfterIntroAction = "hold";
+// Giữ logo trên màn hình; sau này có thể thêm các option điều hướng tại đây.
+export const AFTER_INTRO_ACTION = "hold" as const;
