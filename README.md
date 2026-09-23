@@ -30,5 +30,6 @@ Intro assets:
 - `public/fxrken-outline.svg`: animated vector contour.
 - `public/fxrken-logo-3d.png`: original transparent 3D logo.
 
-After the intro finishes, the page reloads and plays it again. Future post-intro
-destinations can be added independently in `src/intro-config.ts`.
+After the reveal finishes, the 3D logo stays on screen and the bright contour
+continues running indefinitely. Future post-intro destinations can be added
+independently in `src/intro-config.ts`.

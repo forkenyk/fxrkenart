@@ -34,8 +34,9 @@ function App() {
     <main className={`fx-shell ${isDay ? "fx-day" : "fx-night"}`}>
       <section className="fx-intro" aria-label="FXRKENART logo intro">
         <div className="fx-mark" aria-hidden="true">
-          <img className="fx-mark__outline" src="/fxrken-outline.svg" alt="" />
+          <img className="fx-mark__aura" src="/fxrken-logo-3d.png" alt="" />
           <img className="fx-mark__solid" src="/fxrken-logo-3d.png" alt="" />
+          <img className="fx-mark__outline" src="/fxrken-outline.svg" alt="" />
         </div>
       </section>
     </main>
