@@ -27,7 +27,7 @@ The intro uses Vietnam time:
 
 Intro assets:
 
-- `public/fxrken-outline.svg`: animated vector contour.
+- `public/fxrken-contour-run.svg`: animated moving contour segment.
 - `public/fxrken-logo-3d.png`: original transparent 3D logo.
 
 After the reveal finishes, the 3D logo stays on screen and the bright contour
