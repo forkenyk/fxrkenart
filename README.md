@@ -31,5 +31,19 @@ Intro asset:
 
 - `public/fxrken-logo-3d.png`: supplied 3D logo. Its traced contour and reveal mask live in `src/LogoReveal.tsx`.
 
-After the intro finishes, the 3D logo stays on screen and the bright contour
-finishes its single pass.
+After the reveal finishes, the 3D logo stays on screen and the bright contour
+continues travelling around the complete silhouette forever. The loop uses
+native SVG animation instead of a CSS timeout, so it does not stop after the
+first pass.
+
+## Replace/deploy the complete project
+
+Do not merge this build with an older `src` or `dist` folder. Replace the old
+project with this complete folder, then run:
+
+```bash
+npm install
+npm run deploy
+```
+
+The included `dist` folder is rebuilt from the source in this package.

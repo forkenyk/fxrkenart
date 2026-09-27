@@ -1,5 +1,5 @@
 const CONTOUR =
-  "M 648.0 53.5 L 665.0 52.5 L 673.5 59.0 L 659.5 88.0 L 660.0 104.5 L 677.0 104.5 L 705.0 96.5 L 738.0 92.5 L 780.0 93.5 L 823.0 101.5 L 857.0 113.5 L 875.5 126.0 L 877.5 132.0 L 866.5 144.0 L 867.0 160.5 L 915.0 173.5 L 964.0 173.5 L 993.0 164.5 L 1026.0 149.5 L 1035.0 148.5 L 1039.5 155.0 L 1036.5 180.0 L 1022.5 221.0 L 1008.5 245.0 L 1008.5 261.0 L 1076.0 306.5 L 1102.0 317.5 L 1132.0 323.5 L 1136.5 329.0 L 1135.5 335.0 L 1123.5 352.0 L 1102.0 373.5 L 1083.5 387.0 L 1083.5 403.0 L 1095.5 424.0 L 1107.5 460.0 L 1111.5 507.0 L 1103.0 512.5 L 1090.0 506.5 L 1074.0 506.5 L 1073.5 559.0 L 1069.0 563.5 L 1034.5 563.0 L 1026.5 592.0 L 1025.5 615.0 L 1018.5 647.0 L 1015.5 654.0 L 1004.5 661.0 L 1005.0 679.5 L 1040.0 679.5 L 1051.5 690.0 L 1049.5 706.0 L 1026.5 752.0 L 1029.5 794.0 L 1027.5 821.0 L 1021.5 849.0 L 1004.5 890.0 L 991.5 908.0 L 970.0 927.5 L 949.0 940.5 L 925.5 947.0 L 914.5 978.0 L 897.5 1010.0 L 878.5 1036.0 L 842.0 1072.5 L 785.0 1118.5 L 720.0 1164.5 L 693.0 1176.5 L 673.0 1179.5 L 637.0 1178.5 L 604.0 1171.5 L 566.0 1151.5 L 525.0 1122.5 L 439.0 1052.5 L 395.5 1009.0 L 370.5 973.0 L 347.0 912.5 L 310.0 914.5 L 300.0 923.5 L 285.0 926.5 L 278.5 914.0 L 277.5 896.0 L 234.5 859.0 L 217.5 835.0 L 207.5 810.0 L 200.5 777.0 L 199.5 747.0 L 202.5 727.0 L 210.5 706.0 L 226.0 687.5 L 242.0 678.5 L 260.5 675.0 L 260.5 657.0 L 234.5 587.0 L 224.5 541.0 L 221.5 501.0 L 187.0 500.5 L 180.5 494.0 L 176.5 465.0 L 176.5 433.0 L 184.5 407.0 L 200.5 381.0 L 200.5 365.0 L 176.5 344.0 L 156.5 310.0 L 159.0 299.5 L 207.0 286.5 L 247.5 263.0 L 247.5 246.0 L 224.5 222.0 L 225.5 215.0 L 240.0 204.5 L 273.0 190.5 L 306.0 183.5 L 328.0 182.5 L 371.0 186.5 L 383.5 159.0 L 403.5 133.0 L 437.0 104.5 L 471.0 85.5 L 481.0 83.5 L 485.5 89.0 L 482.5 119.0 L 499.0 119.5 L 530.0 96.5 L 566.0 77.5 L 604.0 63.5 Z";
+  "M 648.0 53.3 L 665.0 53.3 L 669.5 56.0 L 672.0 61.0 L 669.8 71.0 L 653.0 102.0 L 652.5 107.0 L 655.0 109.1 L 700.0 97.2 L 740.0 92.1 L 779.0 93.2 L 814.0 98.9 L 853.0 111.5 L 872.9 124.0 L 875.2 134.0 L 861.7 151.0 L 863.0 157.3 L 927.0 174.2 L 964.0 172.2 L 990.8 164.0 L 1024.0 150.2 L 1034.0 150.3 L 1037.8 154.0 L 1039.5 160.0 L 1035.8 184.0 L 1025.4 215.0 L 1007.1 250.0 L 1007.0 257.0 L 1074.1 304.0 L 1096.0 314.2 L 1128.0 322.7 L 1133.0 326.4 L 1135.0 332.0 L 1132.0 341.0 L 1122.2 354.0 L 1104.1 372.0 L 1084.6 387.0 L 1081.0 393.0 L 1097.0 427.0 L 1106.3 454.0 L 1111.7 484.0 L 1110.8 505.0 L 1107.0 509.9 L 1102.0 511.2 L 1080.0 502.9 L 1074.0 504.8 L 1075.1 540.0 L 1072.7 557.0 L 1065.0 563.3 L 1042.0 561.8 L 1035.4 566.0 L 1028.5 590.0 L 1019.5 644.0 L 1003.8 669.0 L 1003.9 675.0 L 1008.0 678.5 L 1044.0 683.3 L 1049.3 688.0 L 1051.6 696.0 L 1047.7 711.0 L 1027.2 755.0 L 1029.5 795.0 L 1027.3 824.0 L 1019.3 857.0 L 1005.4 889.0 L 991.0 909.0 L 974.0 924.9 L 954.0 938.2 L 927.3 950.0 L 907.0 994.0 L 891.2 1020.0 L 866.0 1050.4 L 837.0 1077.3 L 770.0 1130.3 L 720.0 1164.8 L 694.0 1176.3 L 664.0 1180.2 L 627.0 1177.4 L 600.0 1170.2 L 565.0 1151.3 L 523.0 1121.4 L 444.0 1057.4 L 397.6 1012.0 L 379.3 988.0 L 367.5 968.0 L 344.0 908.6 L 339.0 907.3 L 328.0 913.0 L 312.0 915.9 L 295.0 925.0 L 285.1 924.0 L 279.7 917.0 L 273.1 893.0 L 238.0 863.3 L 219.0 838.0 L 208.5 814.0 L 201.2 784.0 L 198.9 755.0 L 201.9 729.0 L 208.8 709.0 L 218.0 695.0 L 233.0 682.5 L 256.3 673.0 L 259.9 668.0 L 260.4 662.0 L 232.9 582.0 L 219.5 506.0 L 214.0 501.4 L 189.0 500.3 L 183.0 496.1 L 180.1 490.0 L 175.9 460.0 L 177.3 428.0 L 184.4 407.0 L 203.2 372.0 L 200.9 367.0 L 183.0 351.4 L 170.6 337.0 L 160.8 321.0 L 157.1 309.0 L 158.3 303.0 L 163.0 298.4 L 208.0 284.7 L 251.6 259.0 L 253.2 255.0 L 251.6 251.0 L 230.8 231.0 L 225.7 221.0 L 229.0 211.9 L 244.0 202.0 L 271.0 190.9 L 304.0 183.5 L 326.0 182.1 L 361.0 187.2 L 367.0 186.3 L 388.4 151.0 L 409.0 126.6 L 441.0 101.3 L 469.0 86.3 L 478.0 85.0 L 483.8 90.0 L 481.1 123.0 L 482.0 127.4 L 485.0 129.1 L 527.0 98.0 L 563.0 78.5 L 605.0 62.9 Z";
 
 export function LogoReveal() {
   return (
@@ -10,8 +10,6 @@ export function LogoReveal() {
       aria-hidden="true"
     >
       <defs>
-        <path id="fxrken-contour" d={CONTOUR} />
-
         <mask
           id="fxrken-progress-mask"
           x="0"
@@ -27,15 +25,33 @@ export function LogoReveal() {
             d={CONTOUR}
             fill="none"
             stroke="#fff"
-          />
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              from="3895"
+              to="0"
+              dur="2.8s"
+              calcMode="spline"
+              keyTimes="0;1"
+              keySplines=".28 .06 .16 1"
+              fill="freeze"
+            />
+            <animate
+              attributeName="stroke-width"
+              values="90;190;470;820;1220"
+              keyTimes="0;.24;.52;.78;1"
+              dur="2.8s"
+              fill="freeze"
+            />
+          </path>
         </mask>
 
         <filter id="fxrken-trail-glow" x="-45%" y="-45%" width="190%" height="190%">
-          <feGaussianBlur stdDeviation="10" />
+          <feGaussianBlur stdDeviation="6" />
         </filter>
         <filter id="fxrken-head-glow" x="-100%" y="-100%" width="300%" height="300%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="wide" />
-          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="tight" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="wide" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight" />
           <feMerge>
             <feMergeNode in="wide" />
             <feMergeNode in="tight" />
@@ -50,28 +66,64 @@ export function LogoReveal() {
         height="1254"
         preserveAspectRatio="xMidYMid meet"
         mask="url(#fxrken-progress-mask)"
-      />
+      >
+        <set attributeName="visibility" to="hidden" begin="2.8s" fill="freeze" />
+      </image>
 
-      <use
-        href="#fxrken-contour"
+      <image
+        href="/fxrken-logo-3d.png?v=7"
+        width="1254"
+        height="1254"
+        preserveAspectRatio="xMidYMid meet"
+        visibility="hidden"
+      >
+        <set attributeName="visibility" to="visible" begin="2.8s" fill="freeze" />
+      </image>
+
+      <path
+        d={CONTOUR}
         className="fx-logo-svg__trail"
         fill="none"
         stroke="#fff"
         filter="url(#fxrken-trail-glow)"
-      />
-      <use
-        href="#fxrken-contour"
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          from="0"
+          to="-3895"
+          dur="2.8s"
+          repeatCount="indefinite"
+        />
+      </path>
+      <path
+        d={CONTOUR}
         className="fx-logo-svg__core"
         fill="none"
         stroke="#fff"
-      />
-      <use
-        href="#fxrken-contour"
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          from="0"
+          to="-3895"
+          dur="2.8s"
+          repeatCount="indefinite"
+        />
+      </path>
+      <path
+        d={CONTOUR}
         className="fx-logo-svg__head"
         fill="none"
         stroke="#fff"
         filter="url(#fxrken-head-glow)"
-      />
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          from="-455.7"
+          to="-4350.7"
+          dur="2.8s"
+          repeatCount="indefinite"
+        />
+      </path>
     </svg>
   );
 }

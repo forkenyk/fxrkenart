@@ -64,31 +64,33 @@ body,
 /* The mask is cumulative: the travelled path remains open and grows inward. */
 .fx-logo-svg__reveal {
   stroke-width: 90;
-  stroke-dasharray: 3895 3895;
-  stroke-dashoffset: 3895;
+  stroke-dasharray: 3715.3 3715.3;
+  stroke-dashoffset: 3715.3;
+  animation: fxrken-path-reveal 2.8s cubic-bezier(.28, .06, .16, 1) both;
 }
 
 .fx-logo-svg__trail {
-  opacity: .28;
-  stroke-width: 14;
-  stroke-dasharray: 662.2 3232.8;
+  opacity: .3;
+  stroke-width: 18;
+  stroke-dasharray: 631.6 3083.7;
+  animation:
+    fxrken-trace 2.8s linear both,
+    fxrken-line-stop 2.8s step-end both;
 }
 
 .fx-logo-svg__core {
-  opacity: .95;
-  stroke-width: 4;
-  stroke-dasharray: 525.8 3369.2;
+  opacity: .9;
+  stroke-width: 5;
+  stroke-dasharray: 501.6 3213.7;
+  animation:
+    fxrken-trace 2.8s linear both,
+    fxrken-line-stop 2.8s step-end both;
 }
 
 .fx-logo-svg__head {
   opacity: 1;
-  stroke-width: 8;
-  stroke-dasharray: 70.1 3824.9;
-  stroke-dashoffset: -455.7;
-}
-
-@media (max-width: 680px) {
-  .fx-mark {
-    width: clamp(200px, 72vw, 330px);
-  }
-}
+  stroke-width: 11;
+  stroke-dasharray: 66.9 3648.4;
+  stroke-dashoffset: -434.7;
+  animation:
+    fxrken-head 2.8s linear both,
