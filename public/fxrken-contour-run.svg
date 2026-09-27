@@ -4,9 +4,19 @@
     <filter id="fxrken-glow" x="-35%" y="-35%" width="170%" height="170%">
       <feGaussianBlur stdDeviation="7"/>
     </filter>
+    <filter id="fxrken-head-glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="13" result="soft"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="tight"/>
+      <feMerge>
+        <feMergeNode in="soft"/>
+        <feMergeNode in="tight"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
   <use href="#fxrken-contour" xlink:href="#fxrken-contour" class="contour-glow" stroke="#fff" stroke-width="11" filter="url(#fxrken-glow)"/>
   <use href="#fxrken-contour" xlink:href="#fxrken-contour" class="contour-dash" stroke="#fff" stroke-width="5"/>
+  <use href="#fxrken-contour" xlink:href="#fxrken-contour" class="contour-head" stroke="#fff" stroke-width="10" filter="url(#fxrken-head-glow)"/>
   <style>
     .contour-dash {
       stroke: #fff;
@@ -17,14 +27,23 @@
       animation: fxrken-contour-draw 2.4s linear infinite;
     }
     .contour-glow {
-      opacity: .52;
+      opacity: .44;
       stroke-linecap: round;
       stroke-dasharray: 620.5 3811.5;
       animation: fxrken-contour-draw 2.4s linear infinite;
     }
+    .contour-head {
+      opacity: .96;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 42 4390;
+      stroke-dashoffset: -578.5;
+      animation: fxrken-contour-head 2.4s linear infinite;
+    }
     @keyframes fxrken-contour-draw { to { stroke-dashoffset: -4432.0; } }
+    @keyframes fxrken-contour-head { to { stroke-dashoffset: -5010.5; } }
     @media (prefers-reduced-motion: reduce) {
-      .contour-dash, .contour-glow { animation: none; }
+      .contour-dash, .contour-glow, .contour-head { animation: none; }
     }
   </style>
 </svg>

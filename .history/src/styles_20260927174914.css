@@ -1,3 +1,35 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.fx-shell {
+  --intro-bg: #000;
+  --intro-ink: #f5f5f3;
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--intro-bg);
+}
+
+/* The original animated contour intro, permanently in dark mode. */
+.fx-intro {
+  position: fixed;
+  inset: 0;
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -62,61 +94,3 @@
   stroke-dashoffset: -434.7;
   animation:
     fxrken-head 2.8s linear both,
-    fxrken-line-stop 2.8s step-end both;
-}
-
-@keyframes fxrken-path-reveal {
-  0% {
-    stroke-dashoffset: 3715.3;
-    stroke-width: 90;
-  }
-  24% {
-    stroke-width: 190;
-  }
-  52% {
-    stroke-width: 470;
-  }
-  78% {
-    stroke-width: 820;
-  }
-  100% {
-    stroke-dashoffset: 0;
-    stroke-width: 1220;
-  }
-}
-
-@keyframes fxrken-trace {
-  from { stroke-dashoffset: 0; }
-  to { stroke-dashoffset: -3715.3; }
-}
-
-@keyframes fxrken-head {
-  from { stroke-dashoffset: -434.7; }
-  to { stroke-dashoffset: -4150; }
-}
-
-/* Remove the moving light exactly when its single contour pass completes. */
-@keyframes fxrken-line-stop {
-  0%, 99.999% { visibility: visible; }
-  100% { visibility: hidden; }
-}
-
-@media (max-width: 680px) {
-  .fx-mark {
-    width: clamp(200px, 72vw, 330px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .fx-logo-svg__reveal {
-    stroke-dashoffset: 0;
-    stroke-width: 1220;
-    animation: none;
-  }
-
-  .fx-logo-svg__trail,
-  .fx-logo-svg__core,
-  .fx-logo-svg__head {
-    display: none;
-  }
-}

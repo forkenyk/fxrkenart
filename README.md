@@ -19,24 +19,17 @@ npm run build
 - Deploy command: `npx wrangler deploy`
 - Root directory: `/`
 
-The opening sequence is split into two independent stages:
+The opening sequence goes directly into the animated contour intro using the
+current supplied logo.
+It stays in dark mode at every hour: the background is always black and the
+animated contour is always white. The original 3D color logo is revealed after
+the moving contour through one synchronized inline SVG. A cumulative mask grows only
+from the path already travelled, opening the logo from its real silhouette
+inward—without whole-logo fading, rotating slices, blur, or scaling.
 
-1. A liquid-chrome reveal forms from the 3D logo alpha, catches a metallic
-   light sweep, and zooms through the camera.
-2. The existing contour-and-3D-logo intro starts immediately underneath the
-   metallic transition and then remains on screen.
+Intro asset:
 
-The existing intro uses Vietnam time:
+- `public/fxrken-logo-3d.png`: supplied 3D logo. Its traced contour and reveal mask live in `src/LogoReveal.tsx`.
 
-- 06:00–17:59: white background and black animated contour.
-- 18:00–05:59: black background and white animated contour.
-- The original 3D color logo is revealed after the contour animation.
-
-Intro assets:
-
-- `public/fxrken-contour-run.svg`: animated moving contour segment.
-- `public/fxrken-logo-3d.png`: original transparent 3D logo.
-
-After both reveals finish, the 3D logo stays on screen and the bright contour
-continues running indefinitely. Metallic timing and future post-intro options
-are isolated in `src/intro-config.ts`.
+After the intro finishes, the 3D logo stays on screen and the bright contour
+finishes its single pass.
