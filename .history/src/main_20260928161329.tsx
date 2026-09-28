@@ -32,16 +32,6 @@ function App() {
 
   return (
     <main className="fx-shell">
-
-      <DynamicInfo
-    avatar="/fxrken-logo-3d.png"
-    name="FXRKENART"
-    role="Digital Artist"
-    status="Available"
-    githubUrl="https://github.com/forkenyk"
-    websiteUrl="https://fxrkenart.forkenyk-work.workers.dev/"
-  />
-
       <section className="fx-intro" aria-label="FXRKENART logo intro">
         {assetsReady && (
           <div className="fx-mark" aria-hidden="true">
