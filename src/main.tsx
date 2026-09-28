@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { LogoReveal } from "./LogoReveal";
 import "./styles.css";
 import { DynamicInfo } from "./DynamicInfo";
+import { MusicVisualizer } from "./MusicVisualizer";
 
 function App() {
   const [assetsReady, setAssetsReady] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
+
+  useEffect(() => {
+    if (assetsReady && matchMedia("(prefers-reduced-motion: reduce)").matches) setIntroDone(true);
+  }, [assetsReady]);
 
   useEffect(() => {
     let active = true;
@@ -32,25 +38,23 @@ function App() {
 
   return (
     <main className="fx-shell">
-
-      <DynamicInfo
-    avatar="/fxrken-logo-3d.png"
-    name="FXRKENART"
-    role="Digital Artist"
-    status="Available"
-    githubUrl="https://github.com/forkenyk"
-    websiteUrl="https://fxrkenart.forkenyk-work.workers.dev/"
-  />
-
       <section className="fx-intro" aria-label="FXRKENART logo intro">
         {assetsReady && (
-          <div className="fx-mark" aria-hidden="true">
+          <div className="fx-mark" onAnimationEnd={event => {
+            if (event.animationName === "fxrken-path-reveal") setIntroDone(true);
+          }}>
+            {introDone && <MusicVisualizer />}
             <LogoReveal />
           </div>
         )}
       </section>
+      {introDone && <DynamicInfo />}
     </main>
   );
 }
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
