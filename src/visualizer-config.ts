@@ -7,21 +7,15 @@ export const MUSIC = {
 
 export const VISUALIZER = {
   fftSize: 4096,
-  // Độ cao mặt sóng (theo chiều cao màn hình).
-  waveHeight: 0.1,
-  // Độ sáng lúc bình thường; nhịp đập làm sáng lên rồi dịu lại.
-  ambientOpacity: 0.48,
-  idleWaveSpeed: 0.22,
-  // Sóng chạy nhanh hơn nhẹ khi kick/sub đập, sau đó hạ tốc mượt.
-  subSpeedBoost: 0.5,
-  kickSpeedBoost: 0.65,
-  // Hạt phía trên: tốc độ nền và lực đẩy lên khi kick/bass đập.
-  idleParticleSpeed: 0.018,
-  beatLift: 0.42,
+  // Snow is almost hidden at rest and blooms only around a fresh beat.
+  idleSnowOpacity: 0.012,
+  beatSnowOpacity: 0.92,
+  idleSnowSpeed: 0.045,
+  beatSnowSpeed: 1.15,
   beatThreshold: 0.009,
   beatFloor: 0.012,
   beatCooldown: 0.13,
   fadeSeconds: 0.22,
-  logoBeatScale: 0.008,
-  logoBeatGlow: 3.5,
+  logoBeatScale: 0.018,
+  logoBeatGlow: 6.5,
 };
