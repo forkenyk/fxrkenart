@@ -1,23 +1,98 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { AudioRing } from './AudioRing';
 import { MUSIC, VISUALIZER } from './visualizer-config';
 
-const clock = (value: number) => `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}`;
-
+/**
+ * The visualizer owns the audio element, but deliberately renders no player
+ * controls. We make the strongest autoplay attempt the browser allows:
+ * audible first, then muted autoplay as a policy-safe fallback.
+ */
 export function MusicVisualizer() {
   const audio = useRef<HTMLAudioElement>(null);
   const analyser = useRef<AnalyserNode | null>(null);
   const context = useRef<AudioContext | null>(null);
   const source = useRef<MediaElementAudioSourceNode | null>(null);
-  const [playing, setPlaying] = useState(false);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-  const [position, setPosition] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(MUSIC.volume);
+
   useEffect(() => {
-    if (audio.current) audio.current.volume = MUSIC.volume;
+    const element = audio.current;
+    if (!element) return;
+    element.autoplay = true;
+    element.loop = true;
+    element.preload = 'auto';
+    element.volume = MUSIC.volume;
+
+    let disposed = false;
+    const setupAudioGraph = () => {
+      if (context.current || !('AudioContext' in window || 'webkitAudioContext' in window)) return;
+      const AudioContextCtor = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AudioContextCtor) return;
+      const ctx = new AudioContextCtor();
+      const fft = ctx.createAnalyser();
+      fft.fftSize = VISUALIZER.fftSize;
+      fft.smoothingTimeConstant = 0.25;
+      fft.minDecibels = -85;
+      fft.maxDecibels = -15;
+      const input = ctx.createMediaElementSource(element);
+      input.connect(fft);
+      fft.connect(ctx.destination);
+      context.current = ctx;
+      source.current = input;
+      analyser.current = fft;
+    };
+    const attemptPlay = async (allowSound: boolean) => {
+      if (disposed) return;
+      try {
+        element.muted = !allowSound;
+        await element.play();
+        setupAudioGraph();
+        // Do not await resume() here: some Chromium builds leave this promise
+        // pending until a gesture, while muted media autoplay can proceed.
+        if (context.current?.state === 'suspended') void context.current.resume().catch(() => undefined);
+      } catch {
+        // Audible autoplay is intentionally retried muted. Browsers do not
+        // expose a safe API to override their user-gesture policy.
+        if (allowSound && !disposed) {
+          try {
+            element.muted = true;
+            await element.play();
+            setupAudioGraph();
+          } catch { /* Wait for a later visibility/interaction retry. */ }
+        }
+      }
+    };
+
+    void attemptPlay(true);
+    // A media element can be present before its first MP3 range is ready.
+    // Retrying on the media readiness events makes muted autoplay reliable
+    // without exposing a control surface.
+    const retryMuted = () => {
+      if (disposed || !element.paused) return;
+      element.muted = true;
+      void element.play().then(() => {
+        setupAudioGraph();
+        if (context.current?.state === 'suspended') void context.current.resume().catch(() => undefined);
+      }).catch(() => undefined);
+    };
+    const autoplayTimer = window.setTimeout(retryMuted, 450);
+    element.addEventListener('loadeddata', retryMuted);
+    element.addEventListener('canplay', retryMuted);
+    const retryWithSound = () => { void attemptPlay(true); };
+    const retryWhenVisible = () => { if (!document.hidden) void attemptPlay(!element.muted); };
+    window.addEventListener('pointerdown', retryWithSound, { passive: true });
+    window.addEventListener('keydown', retryWithSound, { passive: true });
+    window.addEventListener('touchstart', retryWithSound, { passive: true });
+    document.addEventListener('visibilitychange', retryWhenVisible);
+
     return () => {
+      disposed = true;
+      window.clearTimeout(autoplayTimer);
+      element.removeEventListener('loadeddata', retryMuted);
+      element.removeEventListener('canplay', retryMuted);
+      window.removeEventListener('pointerdown', retryWithSound);
+      window.removeEventListener('keydown', retryWithSound);
+      window.removeEventListener('touchstart', retryWithSound);
+      document.removeEventListener('visibilitychange', retryWhenVisible);
+      element.pause();
       source.current?.disconnect();
       analyser.current?.disconnect();
       void context.current?.close();
@@ -26,58 +101,9 @@ export function MusicVisualizer() {
       context.current = null;
     };
   }, []);
-  const toggle = async () => {
-    const element = audio.current;
-    if (!element || busy) return;
-    if (!element.paused) { element.pause(); return; }
-    setBusy(true);
-    setError('');
-    try {
-      if (!context.current) {
-        const ctx = new AudioContext();
-        context.current = ctx;
-        const fft = ctx.createAnalyser();
-        fft.fftSize = VISUALIZER.fftSize;
-        fft.smoothingTimeConstant = .25;
-        fft.minDecibels = -85;
-        fft.maxDecibels = -15;
-        const input = ctx.createMediaElementSource(element);
-        input.connect(fft);
-        fft.connect(ctx.destination);
-        source.current = input;
-        analyser.current = fft;
-      }
-      await context.current.resume();
-      await element.play();
-    } catch {
-      element.pause();
-      setError('Không phát được nhạc. Kiểm tra file audio rồi bấm phát lại.');
-    } finally { setBusy(false); }
-  };
+
   return <>
     <AudioRing analyser={analyser} audio={audio} />
-    <div className="fx-music-panel">
-      <audio ref={audio} src={MUSIC.src} preload="metadata" loop
-        onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}
-        onTimeUpdate={() => setPosition(audio.current?.currentTime || 0)}
-        onLoadedMetadata={() => setDuration(Number.isFinite(audio.current?.duration) ? audio.current!.duration : 0)}
-        onError={() => { setPlaying(false); setError('Không tải được nhạc. Kiểm tra public/audio/track.mp3.'); }} />
-      <div className="fx-music-row">
-        <button className="fx-play" onClick={() => void toggle()} disabled={busy}
-          aria-label={playing ? 'Tạm dừng' : 'Phát nhạc'} title={playing ? 'Tạm dừng' : 'Phát nhạc'}>
-          {playing ? <svg viewBox="0 0 24 24"><path d="M7 5h3v14H7zm7 0h3v14h-3z" /></svg>
-            : <svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z" /></svg>}
-        </button>
-        <div className="fx-track"><span>{MUSIC.title}</span><small>{error || (busy ? 'Đang tải nhạc…' : playing ? 'Đang phát' : 'Bấm phát để bật âm thanh')}</small></div>
-        <label className="fx-volume" title="Âm lượng">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm12-2c3 3 3 7 0 10m3-13c5 5 5 11 0 16" /></svg>
-          <input aria-label="Âm lượng" type="range" min="0" max="1" step="0.01" value={volume}
-            onChange={e => { const v = Number(e.target.value); setVolume(v); if (audio.current) audio.current.volume = v; }} />
-        </label>
-      </div>
-      <div className="fx-seek"><time>{clock(position)}</time><input aria-label="Tua nhạc" type="range" min="0" max={duration || 1} step="0.1" value={position} disabled={!duration}
-        onChange={e => { const t = Number(e.target.value); if (audio.current) audio.current.currentTime = t; setPosition(t); }} /><time>{clock(duration)}</time></div>
-      {error && <p className="fx-audio-error" role="alert">{error}</p>}
-    </div>
+    <audio ref={audio} src={MUSIC.src} autoPlay loop playsInline preload="auto" aria-hidden="true" />
   </>;
 }

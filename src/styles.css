@@ -18,6 +18,8 @@ button, input { font: inherit; }
   width: clamp(210px, 25vw, 380px);
   aspect-ratio: 1;
   isolation: isolate;
+  --logo-beat-scale: 1;
+  --logo-beat-glow: 0px;
 }
 
 .fx-logo-svg {
@@ -30,6 +32,10 @@ button, input { font: inherit; }
   display: block;
   user-select: none;
   -webkit-user-drag: none;
+  transform: scale(var(--logo-beat-scale));
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 0 var(--logo-beat-glow) rgb(255 255 255 / .28));
+  transition: transform 110ms ease-out, filter 150ms ease-out;
 }
 
 .fx-logo-svg__reveal,
@@ -132,30 +138,10 @@ button, input { font: inherit; }
   }
 }
 
-.fx-audio-ring { position: absolute; width: 225%; height: 225%; left: -62.5%; top: -62.5%; z-index: 0; pointer-events: none; animation: ring-arrive 1.2s ease-out both; }
-@keyframes ring-arrive { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: scale(1); } }
-.fx-music-panel { position: fixed; bottom: max(24px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); width: min(440px, calc(100vw - 32px)); padding: 14px 17px 11px; border: 1px solid #ffffff20; border-radius: 20px; background: #101010ed; z-index: 10; animation: controls-arrive .7s ease-out both; }
-@keyframes controls-arrive { from { opacity: 0; } to { opacity: 1; } }
-.fx-music-row { display: flex; align-items: center; gap: 12px; }
-.fx-play { width: 38px; height: 38px; flex-shrink: 0; display: grid; place-items: center; color: #000; background: #eee; border: 0; border-radius: 50%; cursor: pointer; }
-.fx-play:hover { background: #fff; box-shadow: 0 0 16px #fff4; }
-.fx-play:disabled { opacity: .5; cursor: wait; }
-.fx-play svg { width: 22px; fill: currentColor; }
-.fx-track { flex: 1; min-width: 0; }
-.fx-track span { display: block; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.fx-track small { display: block; margin-top: 6px; font-size: 10px; color: #999; }
-.fx-volume { display: flex; align-items: center; gap: 6px; }
-.fx-volume svg { width: 15px; height: 15px; fill: none; stroke: #aaa; stroke-width: 1.5; }
-.fx-volume input { width: 58px; }
-.fx-seek { display: flex; gap: 9px; align-items: center; margin-top: 12px; }
-.fx-seek input { flex: 1; min-width: 0; }
-.fx-seek time { font-size: 9px; color: #999; font-variant-numeric: tabular-nums; }
-.fx-music-panel input { accent-color: white; cursor: pointer; height: 12px; margin: 0; }
-.fx-audio-error { color: #eee; font-size: 11px; margin: 9px 0 0; }
 button:focus-visible, input:focus-visible { outline: 2px solid white; outline-offset: 5px; }
 @media (max-width: 680px) { .fx-mark { width: clamp(170px, 49vw, 280px); } }
-@media (max-height: 560px) { .fx-mark { width: min(32vh, 220px); margin-bottom: 90px; } .fx-music-panel { bottom: 12px; } }
-@media (prefers-reduced-motion: reduce) { .fx-audio-ring, .fx-music-panel { animation: none; } }
+@media (max-height: 560px) { .fx-mark { width: min(32vh, 220px); margin-bottom: 36px; } }
+@media (prefers-reduced-motion: reduce) { .fx-logo-svg { transition: none; } }
 
 /* Restored Dynamic Info; fixed independently of logo and audio controls. */
 .dynamic-info { position:fixed; z-index:30; left:50%; top:24px; transform:translateX(-50%); width:min(350px,calc(100vw - 32px)); color:#eee; background:#111e; border:1px solid #ffffff26; border-radius:22px; padding:15px 19px; backdrop-filter:blur(20px); box-shadow:0 8px 35px #0008; transition:border-color .3s,box-shadow .3s; outline-offset:5px; }
@@ -181,5 +167,6 @@ button:focus-visible, input:focus-visible { outline: 2px solid white; outline-of
 @media(max-width:680px) { .dynamic-info { top:max(16px,env(safe-area-inset-top)); } }
 @media(prefers-reduced-motion:reduce) { .dynamic-info,.dynamic-info__bottom { transition:none; } }
 
-.fx-plasma-background { position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:0; }
-.fx-visualizer-error { position:fixed;bottom:130px;left:50%;transform:translateX(-50%);font-size:11px;color:#999;width:280px;text-align:center; }
+.fx-visualizer-error { position:fixed;bottom:24px;left:50%;transform:translateX(-50%);font-size:11px;color:#999;width:280px;text-align:center; }
+
+.fx-particle-background { position:fixed;inset:0;width:100vw;height:100svh;pointer-events:none;z-index:0; }
