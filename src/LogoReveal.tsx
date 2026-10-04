@@ -3,77 +3,24 @@ const CONTOUR =
 
 export function LogoReveal() {
   return (
-    <svg
-      className="fx-logo-svg"
-      viewBox="0 0 1254 1254"
-      role="presentation"
-      aria-hidden="true"
-    >
+    <svg className="fx-logo-svg" viewBox="0 0 1254 1254" role="presentation" aria-hidden="true">
       <defs>
         <path id="fxrken-contour" d={CONTOUR} />
         <clipPath id="fxrken-silhouette"><path d={CONTOUR} /></clipPath>
-
-        <mask
-          id="fxrken-progress-mask"
-          x="0"
-          y="0"
-          width="1254"
-          height="1254"
-          maskUnits="userSpaceOnUse"
-          maskContentUnits="userSpaceOnUse"
-          style={{ maskType: "alpha" }}
-        >
-          <path
-            className="fx-logo-svg__reveal"
-            d={CONTOUR}
-            fill="none"
-            stroke="#fff"
-          />
-        </mask>
-
-        <filter id="fxrken-trail-glow" x="-45%" y="-45%" width="190%" height="190%">
-          <feGaussianBlur stdDeviation="10" />
-        </filter>
-        <filter id="fxrken-head-glow" x="-100%" y="-100%" width="300%" height="300%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="wide" />
-          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="tight" />
-          <feMerge>
-            <feMergeNode in="wide" />
-            <feMergeNode in="tight" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
+        <filter id="fxrken-outline-glow" x="-45%" y="-45%" width="190%" height="190%">
+          <feGaussianBlur stdDeviation="12" />
         </filter>
       </defs>
-
       <image
+        className="fx-logo-image"
         href="/fxrken-logo-3d.png?v=7"
         width="1254"
         height="1254"
         preserveAspectRatio="xMidYMid meet"
-        mask="url(#fxrken-progress-mask)"
         clipPath="url(#fxrken-silhouette)"
       />
-
-      <use
-        href="#fxrken-contour"
-        className="fx-logo-svg__trail"
-        fill="none"
-        stroke="#fff"
-        filter="url(#fxrken-trail-glow)"
-      />
-      <use
-        href="#fxrken-contour"
-        className="fx-logo-svg__core"
-        fill="none"
-        stroke="#fff"
-      />
-      <use
-        href="#fxrken-contour"
-        className="fx-logo-svg__head"
-        fill="none"
-        stroke="#fff"
-        filter="url(#fxrken-head-glow)"
-      />
+      <use href="#fxrken-contour" className="fx-logo-outline fx-logo-outline--glow" fill="none" stroke="#fff" filter="url(#fxrken-outline-glow)" />
+      <use href="#fxrken-contour" className="fx-logo-outline fx-logo-outline--core" fill="none" stroke="#fff" />
     </svg>
   );
 }
